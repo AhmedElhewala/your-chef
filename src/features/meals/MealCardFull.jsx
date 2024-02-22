@@ -239,14 +239,19 @@ function MealCardFull({id, close, isOpen}) {
 
   useModalEffects(modalRef, isOpen, close);
 
-  if (isLoading || meal.length === 0) return <Spinner />
+  if (isLoading || meal?.length === 0) return <Spinner />;
+
+  if (meal && meal.length > 0) {
+    if (id !== meal[0].idMeal) return <Spinner />;
+  }
+
 
   const {strMeal, strCategory, strArea, strInstructions, strMealThumb, strYoutube} = meal[0];
 
   const handleToggleTab = (tab) => {
     setOpenTab(tab)
   }
-  
+
   const strYoutubeId =strYoutube.split("v=")[1]
   const ingredients = extractIngredientsAndMeasures(meal[0]);
 

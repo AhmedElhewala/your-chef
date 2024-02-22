@@ -41,26 +41,26 @@ function App() {
         <BookmarkProvider>
           {isLoading && <Spinner />}
           <GlobalStyles />
-            <Router>
-              <SearchMealContextProvider>
-                <AppLayout>
-                <Routes>
-                  <Route path="/" element={<Home />}/>
-                  <Route path="category" element={<Category />}>
-                    <Route index element={<CategoriesList />} />
-                    <Route path=":category" element={<CatergoryMealsList />} />
-                  </Route>
-                  <Route path="area" element={<Area />}>
-                    <Route index element={<AreasList />} />
-                    <Route path=":area" element={<AreaMealList />}/>
-                  </Route>
-                  <Route path="bookmark" element={<Bookmark />}/>
-                  <Route path="*" element={<ErrorPage />} />
-                </Routes>
-                </AppLayout>
-              </SearchMealContextProvider>
-            </Router>
-          </BookmarkProvider>
+          <Router>
+            <SearchMealContextProvider>
+              <AppLayout>
+              <Routes>
+                <Route path="/" element={<Home />}/>
+                <Route path="category" element={<Category />}>
+                  <Route index element={<CategoriesList />} />
+                  <Route path=":category" element={<CatergoryMealsList />} />
+                </Route>
+                <Route path="area" element={<Area />}>
+                  <Route index element={<AreasList />} />
+                  <Route path=":area" element={<AreaMealList />}/>
+                </Route>
+                <Route path="bookmark" element={<Bookmark />}/>
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+              </AppLayout>
+            </SearchMealContextProvider>
+          </Router>
+        </BookmarkProvider>
       </DarkModeProvider>
     </QueryClientProvider>
   )

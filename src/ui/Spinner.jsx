@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import {LoaderAnimation, PanAnimation, ShadowAnimation} from "../styles/Animations"
 import Overlay from "./Overlay";
 import { createPortal } from "react-dom";
+import { eggAnimation, panAnimation } from "../styles/Animations";
 
 const SpinnerContainer = styled.div`
   width: 100%;
@@ -10,65 +10,65 @@ const SpinnerContainer = styled.div`
   background-color: transparent;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   flex-direction: column;
+  gap: 15vh;
   z-index: 100000;
+  
 `;
 
-const PanLoader = styled.div`
-  width: 180px;
-  height: 180px;
-  margin: 100px auto;
-`
-
-const Loader = styled.div`
+const StyledSpinner = styled.div`
   position: relative;
-  top: 10%;
-  left: 0;
-  z-index: -1;
-  width: 60%;
-  height: 45%;
-  border: 10px solid transparent;
-  border-bottom: 10px solid #fdd835;
-  border-radius: 50%;
-  animation: ${LoaderAnimation} 2s infinite;
-  animation-timing-function: linear;
-`
+  width: 120px;
+  height: 14px;
+  border-radius: 0 0 15px 15px;
+  background-color: #3e494d;
+  box-shadow: 0 -1px 4px #5d6063 inset;
+  animation: ${panAnimation} 0.5s linear alternate infinite;
+  transform-origin: 170px 0;
+  z-index: 10;
+  perspective: 300px;
 
-const PanContainer = styled.div`
-  display: flex;
-  width: 100%;
-  animation: ${PanAnimation} 2s infinite;
-`
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc( 100% - 2px);
+    top: 0;
+    z-index: -2;
+    height: 10px;
+    width: 70px;
+    border-radius: 0 4px 4px 0;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(#6c4924, #4b2d21), linear-gradient(#4d5457 24px, transparent 0), linear-gradient(#9f9e9e 24px, transparent 0);
+    background-size: 50px 10px , 4px 8px , 24px 4px;
+    background-position: right center , 17px center , 0px center;
+  }
 
-const Pan = styled.div`
-  width: 60%;
-  height: 20px;
-  background: linear-gradient(#3949ab, #5c6bc0);
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
-`
-
-const Handle = styled.div`
-  width: 40%;
-  height: 10px;
-  background: linear-gradient(#3949ab, #5c6bc0);
-  border-radius: 10px;
-`
-
-const Shadow = styled.div`
-  position: relative;
-  top: 15%;
-  left: 15%;
-  width: 30%;
-  height: 8px;
-  background: lightgray;
-  border-radius: 20px;
-  animation: ${ShadowAnimation} 2s infinite;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: -2;
+    transform: translate(-50% , -20px) rotate3d(75, -2, 3, 78deg);
+    width: 55px;
+    height: 53px;
+    background: #fff;
+    background-image:
+    radial-gradient(circle 3px , #fff6 90%, transparent 10%),
+    radial-gradient(circle 12px , #ffc400 90%, transparent 10%),
+    radial-gradient(circle 12px , #ffae00 100%, transparent 0);
+    background-repeat: no-repeat;
+    background-position: -4px -6px , -2px -2px , -1px -1px;
+    box-shadow: -2px -3px #0002 inset, 0 0 4px #0003 inset;
+    border-radius: 47% 36% 50% 50% / 49% 45% 42% 44%;
+    animation: ${eggAnimation} 1s ease-out infinite;
+  }
 `
 
 const StyledMsgContainer = styled.p`
   color: var(--color-grey-800);
+  filter: drop-shadow(0 0 2px var(--color-grey-500));
   font-size: 1.8rem;
   font-weight: bold;
   @media screen and (max-width: 767px){
@@ -82,14 +82,7 @@ function Spinner() {
     createPortal(
       <Overlay>
         <SpinnerContainer>
-          <PanLoader>
-            <Loader />
-            <PanContainer>
-              <Pan />
-              <Handle />
-            </PanContainer>
-            <Shadow />
-          </PanLoader>
+          <StyledSpinner />
           <StyledMsgContainer>
             The meal is cocking, now! Please wait while loading ... 
           </StyledMsgContainer>

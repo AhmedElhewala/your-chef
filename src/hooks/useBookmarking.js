@@ -6,12 +6,12 @@ import useBookmarkMeals from "../features/Meals/useBookmarkMeals";
 function useBookmarkLogic(marked) {
   const [isMarked, setIsMarked] = useState(marked);
   const {addBookmark, removeBookmark} = useBookmark();
-  const {refresh} = useBookmarkMeals()
+  const {refetch} = useBookmarkMeals()
   const location = useLocation();
   const bookmarkPath = location.pathname;
 
   const handleBookmarking = (id) => {
-    if (bookmarkPath === "bookmark") refresh();
+    if (bookmarkPath === "bookmark") refetch();
     isMarked ? removeBookmark(id) : addBookmark(id);
     setIsMarked((isMarked) => !isMarked);
   };
