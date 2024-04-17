@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useLocation} from "react-router-dom"
 import { useBookmark } from "../context/BookmarkContext";
-import useBookmarkMeals from "../features/Meals/useBookmarkMeals";
+import useBookmarkMeals from "../features/meals/useBookmarkMeals";
 
 function useBookmarkLogic(marked) {
   const [isMarked, setIsMarked] = useState(marked);
